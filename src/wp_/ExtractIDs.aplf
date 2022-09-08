@@ -1,7 +1,6 @@
  ExtractIDs←{
-     j←⎕JSON ⍵
-     0=≢j:⍬ ⍬
-     (id wp)←↓⍉↑j.(_ID dcms_id)
+     0=≢⍵:⍬ ⍬
+     (id wp)←↓⍉↑⍵.(id(meta.dcms_id))
      wp←∊2⊃∘⎕VFI¨wp
      id wp
  }

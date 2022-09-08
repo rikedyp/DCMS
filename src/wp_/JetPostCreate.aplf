@@ -1,16 +1,16 @@
- JetCCTCreate←{
+ JetPostCreate←{
+     0=≢⍵:''
      info←⍵
-     0=≢info:
-     url←#.GLOBAL.secrets.wordpress.url
+     url←#.GLOBAL.secrets.wordpress.url,'wp/v2/'
      name←#.GLOBAL.secrets.wordpress.user
      pass←#.GLOBAL.secrets.wordpress.token~' '
      auth←'Basic ',#.HttpCommand.Base64Encode name,':',pass
      h←⎕NEW #.HttpCommand
      h.Command←'POST'
-     h.URL←url,info.cct
+     h.URL←url,info.cpt
      h.Headers⍪←'Authorization'auth
      h.Params←info
      r←h.Run
-     200≠r.HttpStatus:512 ⎕SIGNAL⍨'WordPress JetCCTCreate POST FAILED: ',r.(⍕HttpStatus),' ',r.HttpMessage
+     201≠r.HttpStatus:512 ⎕SIGNAL⍨'WordPress JetPostCreate FAILED: ',r.(⍕HttpStatus),' ',r.HttpMessage
      0(r.Data)
  }

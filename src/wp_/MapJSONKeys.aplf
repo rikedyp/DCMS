@@ -1,4 +1,6 @@
  MapJSONKeys←{
+ ⍝ Copy values from ⍺ into ←
+ ⍝ Changing keys from (ka←⊣/⍵) into (kr←⊢/⍵)
      0=≢⍺:⍺
      r←⎕JSON¨(≢⍺)⍴⊂'{}'
      (ka kr)←⍵

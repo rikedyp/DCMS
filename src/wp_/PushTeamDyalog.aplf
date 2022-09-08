@@ -1,0 +1,27 @@
+ msg←PushTeamDyalog;d;j;dcms;p;_id;wp;map;export;exists;create;update;AmendItemID;pid;td
+ msg←0 'OK'
+ d←#.CACHE.persons.organisation∊⊂'Dyalog Ltd'
+ j←d⌿⎕JSON #.CACHE.persons.list
+ :If 0=≢j
+     msg←¯404 'No persons in DCMS system'
+     :Return
+ :EndIf
+ dcms←j.id
+ td←'wp/v2/team-dyalog'
+ p←⎕JSON WPGet td
+ p,←⎕JSON'?status=draft'WPGet td   ⍝ Fetch existing posts
+ (_id wp)←ExtractIDs p
+ map←↓⍉↑(('id' 'meta.dcms_id')('name' 'title')('url_slug' 'slug'))
+ export←j MapJSONKeys map
+ export.cpt←⊂'team-dyalog'
+ exists←dcms∊wp
+ _id⌿⍨←wp∊dcms   ⍝ Ignore dcms_id which do not exist in DCMS
+ create←(~exists)⌿export
+ :If 0<≢create
+     create.status←⊂'draft'
+ :EndIf
+ update←exists⌿export
+ AmendItemID←{0=≢⍺:⍺ ⋄ ref←⍺ ⋄ ref._ID←⍵ ⋄ ref}
+ update←update AmendItemID _id
+ JetPostCreate¨create,⊂''
+ JetPostUpdate¨update,⊂''
