@@ -42,6 +42,13 @@ This Listing can then be included in the Template as an Elementor Listing Grid w
     For a page showing a list or grid of items, you might get good results using a Listing from a REST API Endpoint.
 
 ## Push data from DCMS to WordPress via REST
+!!!Warning "ISSUE"
+	For some reason, I'm not able to update meta fields in JetEngine Custom Post Type posts using the WordPress API. The `title` (name) and `slug` (URL slug) fields are updated, but not the meta dcms_id field.
+
+	It may be possible to work around this by changing the ID in the database
+
+	For now, we are going to use the WordPress mechanisms to handle most of the data. DCMS will be developed primarily to drive the new Dyalog.TV video library.
+
 A custom post type contains the ID into the relevant SQL table. For example, the `team-dyalog` CPT contains fields:
 
 - `title` (The person's chosen name), 
