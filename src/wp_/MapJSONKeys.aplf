@@ -1,8 +1,11 @@
  MapJSONKeys←{
  ⍝ Copy values from ⍺ into ←
  ⍝ Changing keys from (ka←⊣/⍵) into (kr←⊢/⍵)
+ ⍝ ⍺ :             vec of ref :: values to be copied
+ ⍝ ⍵ : nested vec of char vec :: name mappings (from to)
      0=≢⍺:⍺
      r←⎕JSON¨(≢⍺)⍴⊂'{}'
-     (ka kr)←⍵
-     ⎕JSON ⎕JSON⊂,2,⊂kr⍪⍺∘.⍎ka   ⍝ Use ⎕JSON Export Wrapper to convert nested matrix
+     (kf kt)←⍵   ⍝ Key From; Key To
+     _←⍺(kf CY kt)¨r
+     r
  }

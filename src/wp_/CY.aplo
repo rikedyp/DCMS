@@ -1,0 +1,14 @@
+ CY←{
+⍝ Copy names from one namespace into another
+⍝ Renaming the keys and possibly within different subnamespaces
+     (FROM TO)←⍺ ⍵   ⍝ Make references to FROM and TO namespaces
+     (kf kt)←⍺⍺ ⍵⍵   ⍝ Keys in FROM and TO
+     p←{r,⍨'.'/⍨×≢r←⍵/⍨0,⍨1↓⌽∨\⌽'.'=⍵}¨kt   ⍝ Get paths for injection result
+     ns←'FROM'∘,¨p                          ⍝ Create paths in FROM namespace
+     _←ns ⎕NS¨⊂⍬
+     from←'FROM.'∘,¨kt                      ⍝ Rename variables within FROM namespace
+     x←from,¨'←FROM.'∘,¨kf
+     _←⍎¨x
+     to←'TO'∘,¨p ⍝ Copy values
+     to ⎕NS¨from
+ }
