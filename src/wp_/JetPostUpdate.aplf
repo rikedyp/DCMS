@@ -6,7 +6,7 @@
      pass←#.GLOBAL.secrets.wordpress.token~' '
      auth←'Basic ',#.HttpCommand.Base64Encode name,':',pass
      h←⎕NEW #.HttpCommand
-     h.Command←'POST'
+     h.Command←'PUT'
      h.URL←url,info.cpt,'/',⍕info._ID
      h.Headers⍪←'Authorization'auth
      h.Params←info

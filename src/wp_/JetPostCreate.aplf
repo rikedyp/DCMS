@@ -12,5 +12,5 @@
      h.Params←info
      r←h.Run
      201≠r.HttpStatus:512 ⎕SIGNAL⍨'WordPress JetPostCreate FAILED: ',r.(⍕HttpStatus),' ',r.HttpMessage
-     0(r.Data)
+     (⎕JSON r.Data).id
  }

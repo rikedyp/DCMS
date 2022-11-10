@@ -1,4 +1,4 @@
- msg←PushTeamDyalog;d;j;dcms;p;_id;wp;map;export;exists;create;update;AmendItemID;pid;td
+ msg←PushTeamDyalog;d;j;dcms;p;_id;wp;map;export;exists;create;update;AmendItemID;pid;td;ids
  msg←0 'OK'
  d←#.CACHE.persons.organisation∊⊂'Dyalog Ltd'
  j←d⌿⎕JSON #.CACHE.persons.list
@@ -23,5 +23,8 @@
  update←exists⌿export
  AmendItemID←{0=≢⍺:⍺ ⋄ ref←⍺ ⋄ ref._ID←⍵ ⋄ ref}
  update←update AmendItemID _id
- JetPostCreate¨create,⊂''
+ ids←¯1↓JetPostCreate¨create,⊂''
+                                 ⍝ TODO Modify ID in DCMS database to match WordPress post ID
+ create←create AmendItemID ids   ⍝ Put newly created post IDs, then use PUT to update meta data.
+ update,←create                  ⍝ For some reason WordPress API won't put meta field values when creating with POST.
  JetPostUpdate¨update,⊂''
