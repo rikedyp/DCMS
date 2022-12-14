@@ -15,8 +15,6 @@
 		HttpCommand: "/app/packages/HttpCommand.dyalog",
 		XL2APL: "/app/packages/XL2APL.dws",
 
-		CodeLocation: "#.DMCS",
-		Paradigm: "REST",
-		LX: "⎕←2⎕NQ#'GetEnvironment' 'CONFIGFILE' ⋄ ⎕←⎕SE.Link.Import 'DCMS',⍥⊂⎕SE.Link.LaunchDir,'/src' ⋄ ⎕←#.DCMS.Run ⍬",
+		LX: "⎕←2⎕NQ#'GetEnvironment' 'CONFIGFILE' ⋄ ⎕←⎕SE.Link.Import 'DCMS',⍥⊂⎕SE.Link.LaunchDir,'/src' ⋄ ⎕←DCMS.Run ⍬",
 	}
 }
