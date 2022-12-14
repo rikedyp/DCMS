@@ -1,0 +1,8 @@
+ Build;link
+ ⎕CS # ⋄ ⎕EX ⎕NL-⍳9
+ 'DCMS'⎕NS ⍬
+ ⎕SE.Link.Import DCMS'src'
+ ⎕SE.UCMD'Tatin.Init'
+ ⎕←⎕SE._Tatin.Client.LoadDependencies'/g/DCMS/packages' '#'
+ ⎕EX'Build'
+ ⎕SAVE'/g/DCMS/dcms.dws'
