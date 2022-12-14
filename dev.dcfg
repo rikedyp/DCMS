@@ -26,8 +26,6 @@
 		HttpCommand: "C:/Program Files/Dyalog/Dyalog APL-64 18.2 Unicode/Library/Conga/HttpCommand.dyalog",
 		XL2APL: "C:/Users/rpark/Documents/APL/Apps/XL2APL-Application-0.0.18/XL2APL/XL2APL.dws",
 
-		CodeLocation: "#.DMCS",
-		Paradigm: "REST",
-		LX: "⎕←⎕SE.Link.Create 'DCMS',⍥⊂⎕SE.Link.LaunchDir,'/src' ⋄ ⎕←#.DCMS.(Run 2⊃∘⎕VFI GetEnv)'debug'",
+		LX: "⎕←⎕SE.Link.Create 'DCMS',⍥⊂⎕SE.Link.LaunchDir,'/src' ⋄ ⎕←DCMS.(Run 2⊃∘⎕VFI GetEnv)'debug'",
 	}
 }
