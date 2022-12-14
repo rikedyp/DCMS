@@ -1,4 +1,5 @@
  Build;link
+ ⎕TKILL ⎕TCNUMS ⎕TID
  ⎕CS # ⋄ ⎕EX ⎕NL-⍳9
  'DCMS'⎕NS ⍬
  ⎕SE.Link.Import DCMS'src'
