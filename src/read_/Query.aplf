@@ -2,18 +2,17 @@
 ⍝ resource: table (or view) to search
 ⍝ qp: query parameters matrix, each row is a query (parameter)(value)
 ⍝ ←: Database entries containing search text
- table←#.GLOBAL.tables⍳⊂resource
+ table←##.GLOBAL.tables⍳⊂resource
  (parameters values)←↓⍉qp
  values←values/¨⍨~∧/¨' '=¨values   ⍝ Clear empty values
 
 ⍝ No query, return whole table
- db←#.DCMS.db
  FromUTF8←'UTF-8'⎕UCS ⎕UCS
- utf8←table⊃#.GLOBAL.utf8_columns
+ utf8←table⊃##.GLOBAL.utf8_columns
  :If 0∊⍴qp
      sql←'SELECT * FROM ',resource
-     #.DCMS.Catch sql_response←#.SQA.Do db sql
-     response←⎕JSON ⎕JSON⊂2,⊂(table⊃#.GLOBAL.columns)⍪⍉FromUTF8¨@utf8⍉3 1⊃sql_response
+     ##.Catch sql_response←##.SQL.Do db sql
+     response←⎕JSON ⎕JSON⊂2,⊂(table⊃##.GLOBAL.columns)⍪⍉FromUTF8¨@utf8⍉3 1⊃sql_response
      :Return
  :EndIf
 
@@ -31,10 +30,10 @@
 
 ⍝ Search according to query parameters "s" for search, or those that are names of columns in the table
  s←values⊃⍨parameters⍳⊂,'s'
- column_params←qp⌿⍨parameters∊table⊃#.GLOBAL.columns
+ column_params←qp⌿⍨parameters∊table⊃##.GLOBAL.columns
  search←' WHERE '/⍨0∨.<≢¨s column_params
  RegexAnd←{∊')',⍨¨'(?=.*'∘,¨' '(≠⊆⊢)⍵}
- text_columns←1↓∊','∘,¨(table⊃#.GLOBAL.columns)/⍨(table⊃#.GLOBAL.type_names)∊'CHAR' 'VARCHAR' ⍝'TEXT' is large
+ text_columns←1↓∊','∘,¨(table⊃##.GLOBAL.columns)/⍨(table⊃##.GLOBAL.type_names)∊'CHAR' 'VARCHAR' ⍝'TEXT' is large
  search,←{0<≢⍵:' CONCAT(',text_columns,') regexp ("',(RegexAnd ⍵),'")' ⋄ ''}s
  Like←⊣,' LIKE ',⊢
  And←⊣,' AND ',⊢
@@ -51,8 +50,8 @@
 
 ⍝ Execute SQL statement
  sql←'SELECT * FROM ',resource,search,limit
- sql #.DCMS.Catch sql_response←#.SQA.Do db sql
- data←⎕JSON ⎕JSON⊂2,⊂(table⊃#.GLOBAL.columns)⍪⍉FromUTF8¨@utf8⍉3 1⊃sql_response
+ sql ##.Catch sql_response←##.SQL.Do db sql
+ data←⎕JSON ⎕JSON⊂2,⊂(table⊃##.GLOBAL.columns)⍪⍉FromUTF8¨@utf8⍉3 1⊃sql_response
 
 ⍝ No pagination, return entire result
  :If 0∊⍴page ⋄ response←data ⋄ :Return ⋄ :EndIf
@@ -60,7 +59,7 @@
 ⍝ Build paginated response
  response←⎕JSON'{}'
  sql←'SELECT COUNT(*) row_count FROM ',resource,search
- response.total←⍬⍴⊃(//⎕VFI)⊃3 1⊃#.SQA.Do db sql
+ response.total←⍬⍴⊃(//⎕VFI)##.SQL.Do db sql
  response.current_page←page
  response.per_page←per_page
  response.(last_page←⌈total÷per_page)
@@ -81,7 +80,7 @@
  range←page+¯4+⍳7×has_final∧current_in_initial⍲current_in_final                            ⍝ Page(-,+)3 or empty
 
  link_pages←(page-1),initial,range,final,page+1
- url←#.DCMS.service.url,'/',table,'?page='
+ url←##.service.url,'/',table,'?page='
  prev_url←{page=1:⊂'null' ⋄ url,⍕page-1}⍬
  next_url←{response.(current_page=last_page):⊂'null' ⋄ url,⍕page+1}⍬
  link_urls←prev_url,⍥⊆(url∘,¨⍕¨initial,range,final),⍥⊆next_url

@@ -3,8 +3,8 @@
 ## Setting up Jarvis to serve a REST API
 
 ```APL
-      service ← ⎕NEW #.Jarvis
-      service.CodeLocation ← #.MyService
+      service ← ⎕NEW Jarvis
+      service.CodeLocation ← MyService
       service.Paradigm ← 'REST'
 ```
 

@@ -65,7 +65,7 @@ With this system, we can expose documentation and media via our API to be used b
     - argue one should ⊃⎕NGET, but in any case
 × Set up basic query
 × Get requests with search
-- ⎕TRAP 0 'E' 'err #.Report {⍵(⍎⍵)}¨⎕nl¯2'
+- ⎕TRAP 0 'E' 'err Report {⍵(⍎⍵)}¨⎕nl¯2'
 × Create database from schema migrations
 × Import and serve Dyalog TV videos data
 × Factor out import of dependencies
@@ -106,7 +106,7 @@ While the system exposes a conventional REST HTTP API for easy adoption into any
 ### Columns
 ∘ to do: perhaps should be table_info or resource_info?
 
-#### #.GLOBAL.columns
+#### GLOBAL.columns
 
 #### api/columns
 The **columns** end point returns the table names, column names and column data types for each public-facing table in the database.

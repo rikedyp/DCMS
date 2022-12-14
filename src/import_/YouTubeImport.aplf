@@ -15,4 +15,4 @@
  video_data,←⊂'DCMS_YouTubeImport'                                                         ⍝      for convenience
  dt_cols←types∊⊂'<S'   ⍝ '<S' should probably be read from sql/type_conversions.txt
  (dt_cols/video_data)←TZ2DDN¨(types∊⊂'<S')/video_data
- #.DCMS.Catch UpdateInsertExternalResource('youtube_videos'exists ids columns types video_data)
+ ##.Catch UpdateInsertExternalResource('youtube_videos'exists ids columns types video_data)

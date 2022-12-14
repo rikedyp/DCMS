@@ -5,7 +5,7 @@
          sql←'SELECT count(*) FROM ',⍵
          #.DCMS.SQL.Do sql
      }
-     n←∊Count¨#.GLOBAL.tables
+     n←∊Count¨#.DCMS.GLOBAL.tables
      _←#.DCMS.Run ⍬
-     n∧.=∊Count¨#.GLOBAL.tables
+     n∧.=∊Count¨#.DCMS.GLOBAL.tables
  }

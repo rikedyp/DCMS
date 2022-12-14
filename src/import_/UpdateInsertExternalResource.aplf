@@ -25,7 +25,7 @@
      columns←WrapBackticks columns
      types←WrapColons types
      sql←'INSERT INTO ',table,' (',columns,') VALUES (',types,')'
-     #.DCMS.SQL.DoBulk sql(values nulls)
+     ##.SQL.DoBulk sql(values nulls)
  :Else
      (updates inserts)←(⊢,⍥⊂~),exists
      i_values←inserts⌿values
@@ -33,12 +33,12 @@
      i_columns←WrapBackticks columns
      i_types←WrapColons types
      sql←'INSERT INTO ',table,' (',i_columns,') VALUES (',i_types,')'
-     #.DCMS.SQL.DoBulk sql(i_values i_nulls)
+     ##.SQL.DoBulk sql(i_values i_nulls)
      u_values←updates⌿values
      u_nulls←updates⌿nulls
      ColumnEquals←',`',('`',⍨⊣),'=:',':',⍨⊢
      u_values,←ids
      u_nulls,←0
      sql←'UPDATE ',table,' SET ',' WHERE id = :I:',⍨1↓∊columns ColumnEquals¨types
-     #.DCMS.SQL.DoBulk sql(u_values u_nulls)
+     ##.SQL.DoBulk sql(u_values u_nulls)
  :EndIf

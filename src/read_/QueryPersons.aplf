@@ -4,7 +4,7 @@
  (p v)←↓⍉qp
 ⍝ No query parameters given, return all persons
  :If 0=≢p   ⍝ All persons
-     res←⎕JSON #.CACHE.persons.list
+     res←⎕JSON CACHE.persons.list
      :Return
  :EndIf
  v←v,⊂''
@@ -13,16 +13,16 @@
  :If 0<≢i
      i←2⊃⎕VFI i
      id←#.CACHE.persons.id⍳i
-     :If id>≢#.CACHE.persons.id
+     :If id>≢CACHE.persons.id
          'Resource not found'req.Fail 404
      :Else
-         res←,id⊃⎕JSON #.CACHE.persons.list
+         res←,id⊃⎕JSON CACHE.persons.list
          res[1].media←⎕JSON id⊃#.CACHE.persons.media
      :EndIf
 ⍝ Organisation given, return selected persons
  :ElseIf 0<≢o
      org←#.CACHE.persons.organisation∊⊆o
-     res←org⌿⎕JSON #.CACHE.persons.list
+     res←org⌿⎕JSON CACHE.persons.list
  :Else
      'Invalid request'req.Fail 400
  :EndIf

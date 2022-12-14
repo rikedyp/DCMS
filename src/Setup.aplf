@@ -4,22 +4,17 @@
  ⍝⎕←⎕SH'env'
  ⎕←'Setting up...'
  ⍝⎕←⎕SH'cat $ODBCINI'
- '#.GLOBAL'⎕NS ⍬
+ 'GLOBAL'⎕NS ⍬
  :If 0∊⍴dev
-     #.GLOBAL.debug←⍬⍴⊃(//⎕VFI)GetEnv'debug'
+     GLOBAL.debug←⍬⍴⊃(//⎕VFI)GetEnv'debug'
  :Else
-     #.GLOBAL.debug←dev
+     GLOBAL.debug←dev
  :EndIf
- #.GLOBAL.log_file←GetEnv'log'
- 'SQA'#.⎕CY'sqapl'
- ⎕←'Loading dependencies...'
- LoadDependency←{0=#.⎕NC ⍵:⎕SE.Link.Import #,⍥⊂GetEnv ⍵}
- LoadDependency¨'Jarvis' 'HttpCommand'
+ GLOBAL.log_file←GetEnv'log' 
  ⎕←'Setting app_dir, secrets'
- #.GLOBAL.app_dir←app_dir←{'/'=⊃⌽⍵:⍵ ⋄ '/',⍨⍵}GetEnv'app_dir'
- #.GLOBAL.secrets←⎕JSON⍠'Dialect' 'JSON5'⊃⎕NGET GetEnv'SECRETS'
- ⎕←'Initialising SQAPL...'
- #.GLOBAL.db←db←'db'
+ GLOBAL.app_dir←app_dir←{'/'=⊃⌽⍵:⍵ ⋄ '/',⍨⍵}GetEnv'app_dir'
+ GLOBAL.secrets←⎕JSON⍠'Dialect' 'JSON5'⊃⎕NGET GetEnv'SECRETS'
+ GLOBAL.db←db←'db'
  ⎕←SQL.Connect GetEnv¨'SQL_DATABASE' 'SQL_PASSWORD' 'SQL_USER'
  ⎕←SQL.SetupSchema⍬
  ⎕←SQL.ProcessTableInformation⍬

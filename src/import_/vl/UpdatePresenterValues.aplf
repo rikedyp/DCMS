@@ -8,7 +8,7 @@
 ⍝     ⍵:               (1<≡)(2=≢⍴) :: data[title;event;presenter;organisation;YYY-MM;URL;description;???]⍝ new data from VideoLibrary sheet
 
 ⍝     ←: id presentation_id person_id role organisation
-⍝        #.GLOBAL.(columns⊃⍨tables⍳⊂'presenter')
+⍝        ##.##.GLOBAL.(columns⊃⍨tables⍳⊂'presenter')
      (p pr evt eid)←⍺.(p pr evt eid) ⋄ d←⍵
 
      p[;2]←##.FromUTF8¨p[;2]

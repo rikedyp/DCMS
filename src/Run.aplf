@@ -1,8 +1,8 @@
  msg←Run dev;debug
  msg←1 2⍴0 'OK'
- #.DCMS.Setup dev
- :If 0∊⍴dev ⋄ debug←#.GLOBAL.debug ⋄ :Else ⋄ debug←dev ⋄ :EndIf
- #.DCMS.read_.BuildCache⍬
+ Setup dev
+ :If 0∊⍴dev ⋄ debug←GLOBAL.debug ⋄ :Else ⋄ debug←dev ⋄ :EndIf
+ read_.BuildCache⍬
  :If 0=⎕NC'service'
      service←⎕NEW #.Jarvis
      service.CodeLocation←⎕THIS

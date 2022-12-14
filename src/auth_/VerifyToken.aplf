@@ -10,7 +10,7 @@
      bear←auth⌿⍨1>sel
      bear≢⍥⎕C'bearer':r⊣⍵.Fail 401   ⍝ FAIL 'Invalid authorization header'
      tok←1↓auth⌿⍨1≤sel
-     key←#.GLOBAL.secrets.upload_token
+     key←##.GLOBAL.secrets.upload_token
      tok≢key:r⊣⍵.Fail 401            ⍝ FAIL 'Invalid bearer token'
      r
  }
