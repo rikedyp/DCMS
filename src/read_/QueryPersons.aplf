@@ -12,12 +12,12 @@
 ⍝ ID given, return specified person with media if found
  :If 0<≢i
      i←2⊃⎕VFI i
-     id←#.CACHE.persons.id⍳i
+     id←CACHE.persons.id⍳i
      :If id>≢CACHE.persons.id
          'Resource not found'req.Fail 404
      :Else
          res←,id⊃⎕JSON CACHE.persons.list
-         res[1].media←⎕JSON id⊃#.CACHE.persons.media
+         res[1].media←⎕JSON id⊃CACHE.persons.media
      :EndIf
 ⍝ Organisation given, return selected persons
  :ElseIf 0<≢o
