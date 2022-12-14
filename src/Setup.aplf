@@ -10,11 +10,12 @@
  :Else
      GLOBAL.debug←dev
  :EndIf
- GLOBAL.log_file←GetEnv'log' 
+ GLOBAL.log_file←GetEnv'log'
  ⎕←'Setting app_dir, secrets'
  GLOBAL.app_dir←app_dir←{'/'=⊃⌽⍵:⍵ ⋄ '/',⍨⍵}GetEnv'app_dir'
  GLOBAL.secrets←⎕JSON⍠'Dialect' 'JSON5'⊃⎕NGET GetEnv'SECRETS'
- GLOBAL.db←db←'db'
+ ⎕SE.UCMD'Tatin.Init'
+ ⎕←⎕SE._Tatin.Client.LoadDependencies(GLOBAL.app_dir,'packages')#
  ⎕←SQL.Connect GetEnv¨'SQL_DATABASE' 'SQL_PASSWORD' 'SQL_USER'
- ⎕←SQL.SetupSchema⍬
- ⎕←SQL.ProcessTableInformation⍬
+ ⎕←SQL.SetupSchema ⍬
+ ⎕←SQL.ProcessTableInformation ⍬
