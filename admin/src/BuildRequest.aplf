@@ -1,0 +1,14 @@
+ BuildRequest←{
+⍝       ⍵: parameter namespace
+⍝  ⍵.data: CSV data as text
+⍝ ⍵.token: bearer authorization token
+
+     h←⎕NEW HttpCommand
+     h.URL←parms.url
+     h.Command←'POST'
+     h.Headers←0 2⍴''
+     h.Headers⍪←'Content-Type' 'text/csv'
+     h.Headers⍪←'Authorization'('Bearer ',⍵.token)
+     h.Params←⍵.data
+     h
+ }

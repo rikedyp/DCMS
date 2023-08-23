@@ -1,0 +1,7 @@
+{Settings: {
+  app_dir: "/g/DCMS",
+  MAXWS:   "2G",
+  SECRETS: "[app_dir]/secrets/secrets.json5",
+  DATA:    "/d/website/DCMS.xlsx",
+  LX:      "⎕SE.Link.Create # '[app_dir]/admin/src'",
+}}

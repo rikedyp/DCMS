@@ -1,0 +1,16 @@
+ res←name UploadFile file;parms;req;res
+ ⍝ Upload a CSV file to the database system, to path specified
+ ⍝ as "name" in data_sources.json5
+ ⍝ file: local path to file
+ ⍝ name: key in data_sources.json5
+ parms←⎕NS ⍬
+
+⍝ parms.url←'localhost:8081/',name
+ ⍝parms.url←'192.168.0.17:8080/',name
+ parms.url←#.url,name
+ parms.token←APIToken'upload_token'
+ parms.data←LoadCSV file~'"'
+
+ req←BuildRequest parms
+ ⎕←'Uploading ',file,' to ',parms.url
+ res←req.Run

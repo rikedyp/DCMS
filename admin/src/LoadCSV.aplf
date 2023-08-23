@@ -1,0 +1,3 @@
+ LoadCSV←{
+     ⎕UCS'UTF-8'⎕UCS⊃⎕NGET ⍵
+ }

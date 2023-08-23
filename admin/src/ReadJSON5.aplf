@@ -1,0 +1,5 @@
+ ReadJSON5←{
+     txt←⊃⎕NGET ⍵
+     txt←'/'@('\'∘=)txt
+     ⎕JSON⍠'Dialect' 'JSON5'⊢txt
+ }

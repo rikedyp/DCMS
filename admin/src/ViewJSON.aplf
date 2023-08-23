@@ -1,0 +1,1 @@
+ ViewJSON←{⎕JSON⍠'Compact' 0⊢⍵}

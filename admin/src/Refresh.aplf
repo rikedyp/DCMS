@@ -1,0 +1,12 @@
+ r←Refresh;h;token
+ h←⎕NEW #.HttpCommand
+ h.URL←#.url,'refresh'
+⍝ h.URL←'localhost:8081/refresh'
+ ⍝h.URL←'192.168.0.17:8080/refresh'
+ token←APIToken'upload_token'
+ h.Headers⍪←'Authorization'('Bearer ',token)
+ h.Command←'GET'
+ h.Timeout←60
+ h.WaitTime←60000
+ ⎕←'Refreshing CACHE'
+ r←h.Run

@@ -1,0 +1,5 @@
+ APIToken←{
+     file←GetEnv'SECRETS'
+     j←⎕JSON⍠'Dialect' 'JSON5'⊃⎕NGET file
+     j⍎⍵
+ }

@@ -1,0 +1,33 @@
+ {url}Upload source;sure;r;ds;src
+⍝ source: 'all' or one from data_sources
+⍝ ]repr -f=json data_sources to inspect
+ data_sources←GetEnv'DATA'
+ :If 0=⎕NC'url' ⋄ url←'http://localhost:8081/' ⋄ :EndIf
+
+ :If 'all'≢⍥⎕C source
+     :Trap 6
+         ds←⎕NS ⍬
+         :For src :In ⊆source
+             ⍎'ds.',src,'←''','''',⍨data_sources⍎src
+         :EndFor
+     :Else
+         ⎕←'Data source not found. Please specify one of:'
+         ⎕←'ALL',⊂data_sources.⎕NL-⍳9
+         'VALUE ERROR'⎕SIGNAL 6
+     :EndTrap
+ :Else
+     ds←data_sources
+ :EndIf
+
+ ⎕←'Pushing data to ',url,'. Are you sure you want to upload?'
+ ⎕←''
+ ⎕←ViewJSON ds
+ ⎕←''
+ ⎕←'Type Y to confirm'
+ sure←⍞
+ :If 'Y'=sure~' '
+     :For r :In ds.⎕NL-⍳9
+         r UploadFile ds⍎r
+     :EndFor
+     Refresh
+ :EndIf
